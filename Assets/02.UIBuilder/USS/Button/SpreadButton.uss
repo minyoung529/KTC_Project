@@ -1,0 +1,30 @@
+.spread-button {
+    -unity-text-align: middle-left;
+    height: 24px;
+    width: 140px;
+}
+
+.spread-button:hover {
+    -unity-text-align: middle-left;
+    height: 24px;
+    width: 140px;
+    background-color: rgba(164, 164, 164, 255);
+}
+
+.spread-button:active {
+    -unity-text-align: middle-left;
+    height: 24px;
+    width: 140px;
+    -unity-text-outline-color: rgba(0, 0, 0, 255);
+    background-color: rgba(243, 243, 243, 255);
+    color: rgba(19, 18, 18, 255);
+}
+
+.spread-textfield {
+    flex-direction: row;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

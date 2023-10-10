@@ -1,0 +1,22 @@
+﻿{
+    "list": [
+        {
+            "sheetName": "BulletData",
+            "sheetAddress": "1y0d8w9eT7-FEHbfpV-3nw__XMnowMEUr6lHACd3hmJA",
+            "sheetRange": "",
+            "sheetGid": "0",
+            "index": 0,
+            "variableNames": [],
+            "types": []
+        },
+        {
+            "sheetName": "Hello",
+            "sheetAddress": "",
+            "sheetRange": "",
+            "sheetGid": "",
+            "index": 1,
+            "variableNames": [],
+            "types": []
+        }
+    ]
+}
