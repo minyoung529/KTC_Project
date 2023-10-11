@@ -6,17 +6,19 @@
             "sheetRange": "",
             "sheetGid": "0",
             "index": 0,
-            "variableNames": [],
-            "types": []
-        },
-        {
-            "sheetName": "Hello",
-            "sheetAddress": "",
-            "sheetRange": "",
-            "sheetGid": "",
-            "index": 1,
-            "variableNames": [],
-            "types": []
+            "variableNames": [
+                "GunName",
+                "Ammo",
+                "ReloadTime",
+                "Speed\r"
+            ],
+            "types": [
+                2,
+                0,
+                1,
+                1
+            ],
+            "sheet": "GunName\tAmmo\tReloadTime\tSpeed\r\nRevolver\t6\t1.2\t3.01\r\nRevolver3\t234234\t1.2\t3\r\nRevolver4\t434\t1.2\t3"
         }
     ]
 }

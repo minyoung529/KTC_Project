@@ -8,12 +8,12 @@ using System;
 
 public class DownloadSheetTSV
 {
-    public void Download(SpreadInformation sheetInfo, Action<string> onSuccess, Action onFail)
+    public void Download(SheetInformation sheetInfo, Action<string> onSuccess, Action onFail)
     {
         EditorCoroutineUtility.StartCoroutine(DownloadCoroutine(sheetInfo, onSuccess, onFail), this);
     }
 
-    private IEnumerator DownloadCoroutine(SpreadInformation sheetInfo, Action<string> onSuccess, Action onFail)
+    private IEnumerator DownloadCoroutine(SheetInformation sheetInfo, Action<string> onSuccess, Action onFail)
     {
         string url = sheetInfo.GetAddress();
 

@@ -19,12 +19,14 @@
                 <ui:Button text="Load Spread Sheet" display-tooltip-when-elided="true" name="LoadButton" style="height: 27px; width: 150px; white-space: nowrap; -unity-text-align: middle-center; background-color: rgb(60, 120, 57); margin-top: 3px; margin-bottom: 3px;" />
                 <ui:Label display-tooltip-when-elided="true" name="LoadProgressText" text="Loading..." style="font-size: 10px; display: flex; visibility: hidden;" />
             </ui:VisualElement>
-            <ui:VisualElement style="width: 490px; height: 31px; flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 2px;">
+            <ui:VisualElement style="width: 100%; height: 300px; flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 2px;">
                 <ui:Label text="Type List" display-tooltip-when-elided="true" style="margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
-                <ui:Button text="+" display-tooltip-when-elided="true" name="AddType" style="width: 20px; height: 20px; margin-left: 1px; margin-right: 1px; margin-top: 1px; margin-bottom: 1px; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px; font-size: 15px;" />
-                <ui:Button text="-" display-tooltip-when-elided="true" name="RemoveType" style="width: 20px; height: 20px; margin-left: 1px; margin-right: 1px; margin-top: 1px; margin-bottom: 1px; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px; font-size: 15px;" />
+                <ui:ScrollView name="TypeScrollView" style="height: 100%; width: 100%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 20px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
             </ui:VisualElement>
-            <ui:ListView focusable="true" name="TypeListView" style="height: 184px; width: 100%; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; margin-left: 5px; margin-right: 2px; margin-top: 3px; margin-bottom: 2px; align-items: flex-start; max-width: 100%; -unity-text-outline-width: 0; -unity-text-outline-color: rgb(0, 0, 0); min-width: 100%; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
+            <ui:VisualElement style="width: 100%; height: 50px; align-items: auto; flex-direction: row; justify-content: center; margin-top: 10px; padding-top: 0;">
+                <ui:Button text="Create SO Script" display-tooltip-when-elided="true" name="CreateScriptButton" style="height: 27px; width: 150px; white-space: nowrap; -unity-text-align: middle-center; background-color: rgb(60, 120, 57); margin-top: 3px; margin-bottom: 3px;" />
+                <ui:Button text="Create SO Datas" display-tooltip-when-elided="true" name="CreateSOButton" style="height: 27px; width: 150px; white-space: nowrap; -unity-text-align: middle-center; background-color: rgb(60, 120, 57); margin-top: 3px; margin-bottom: 3px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

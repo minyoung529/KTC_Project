@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Net;
-using System.Runtime.Remoting.Messaging;
+using SheetImporter;
 
 [System.Serializable]
-public class SpreadInformation
+public class SheetInformation
 {
     public string sheetName;
     public string sheetAddress;
@@ -14,6 +13,8 @@ public class SpreadInformation
     // 직렬화용
     public List<string> variableNames;
     public List<DataType> types;
+
+    public string sheet;
 
     public string GetAddress()
     {

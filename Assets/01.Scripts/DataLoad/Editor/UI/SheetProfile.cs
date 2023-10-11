@@ -1,3 +1,4 @@
+using SheetImporter;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SpreadProfile
+public class SheetProfile
 {
     #region PREFAB
     private VisualTreeAsset spreadTypeField;
@@ -20,7 +21,7 @@ public class SpreadProfile
     #endregion
 
     #region TYPE LIST
-    private ListView typeListView;
+    private ScrollView typeListView;
     private List<EnumField> enumFields = new List<EnumField>();
     #endregion
 
@@ -28,7 +29,7 @@ public class SpreadProfile
     private EventCallback<ChangeEvent<string>> nameChangeEvent;
     private EventCallback<ChangeEvent<string>> addressChangeEvent;
 
-    private SpreadInformation curInfo = null;
+    private SheetInformation curInfo = null;
 
     public void Initizlie(VisualElement rootVisualElement)
     {
@@ -39,7 +40,7 @@ public class SpreadProfile
         gidField = rootVisualElement.Q<TextField>("GidField");
         rangeField = rootVisualElement.Q<TextField>("RangeField");
 
-        typeListView = rootVisualElement.Q<ListView>("TypeListView");
+        typeListView = rootVisualElement.Q<ScrollView>("TypeScrollView");
         sheetLinkText = rootVisualElement.Q<Label>("SheetLinkLabel");
 
         nameChangeEvent += SetNameField;
@@ -58,7 +59,7 @@ public class SpreadProfile
         curInfo.sheetName = value.newValue;
     }
 
-    public void OnSelectSpread(SpreadInformation info)
+    public void OnSelectSpread(SheetInformation info)
     {
         curInfo = info;
         if (curInfo == null) return;
@@ -69,6 +70,7 @@ public class SpreadProfile
         rangeField.SetValueWithoutNotify(curInfo.sheetRange);
 
         SetSheetLinkText(curInfo);
+        UpdateList(curInfo);
     }
 
     public void OnNameChanged(EventCallback<ChangeEvent<string>> evt)
@@ -85,12 +87,12 @@ public class SpreadProfile
         SetSheetLinkText(curInfo);
     }
 
-    private void SetSheetLinkText(SpreadInformation info)
+    private void SetSheetLinkText(SheetInformation info)
     {
         sheetLinkText.text = $"Sheet Link: {info.GetAddress()}";
     }
 
-    private void UpdateList(SpreadInformation info)
+    public void UpdateList(SheetInformation info)
     {
         int diff = info.variableNames.Count - enumFields.Count;
 
@@ -110,6 +112,7 @@ public class SpreadProfile
 
             if (active)
             {
+                enumFields[i].Init(DataType.Int);
                 enumFields[i].label = info.variableNames[i];
                 enumFields[i].value = info.types[i];
             }
@@ -119,6 +122,18 @@ public class SpreadProfile
     private void CreateSpreadData()
     {
         TemplateContainer container = spreadTypeField.CloneTree();
-        enumFields.Add(container.Q<EnumField>("EnumField"));
+        EnumField enumField = container.Q<EnumField>("EnumField");
+
+        enumFields.Add(enumField);
+        EventCallback<ChangeEvent<Enum>> evt = (x) => OnChangeEnumValue(x, enumField);
+        enumField.RegisterValueChangedCallback(evt);
+
+        typeListView.Add(container);
+    }
+
+    private void OnChangeEnumValue(ChangeEvent<Enum> evt, EnumField field)
+    {
+        int idx = enumFields.IndexOf(field);
+        curInfo.types[idx] = (DataType)evt.newValue;
     }
 }

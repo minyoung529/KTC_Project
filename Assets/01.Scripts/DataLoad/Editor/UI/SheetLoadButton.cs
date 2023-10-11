@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SpreadLoadButton
+public class SheetLoadButton
 {
     private Button loadButton;
     private Label loadProgressText;
     private DownloadSheetTSV downloadSheet = new();
+
+    public Action<string> OnSuccessLoad { get; set; }
+    public Action OnFailLoad { get; set; }
 
     public void Initialize(VisualElement visualElement)
     {
@@ -15,17 +19,20 @@ public class SpreadLoadButton
         loadProgressText = visualElement.Q<Label>("LoadProgressText");
 
         loadButton.clicked += OnLoadButtonClicked;
+
+        OnSuccessLoad = OnLoadSuccess;
+        OnFailLoad = OnLoadFail;
     }
 
     private void OnLoadButtonClicked()
     {
-        if (SpreadManagingWindow.CurInfo == null)
+        if (SheetManagingWindow.CurInfo == null)
             return;
 
         loadProgressText.visible = true;
         loadProgressText.style.color = Color.white;
         loadProgressText.text = "Loading...";
-        downloadSheet.Download(SpreadManagingWindow.CurInfo, OnLoadSuccess, OnLoadFail);
+        downloadSheet.Download(SheetManagingWindow.CurInfo, OnSuccessLoad, OnFailLoad);
     }
 
     private void OnLoadSuccess(string value)
@@ -40,7 +47,7 @@ public class SpreadLoadButton
         loadProgressText.text = "Load Fail...";
     }
 
-    public void OnSelectedSpread(SpreadInformation info)
+    public void OnSelectedSpread(SheetInformation info)
     {
         loadProgressText.visible = false;
     }

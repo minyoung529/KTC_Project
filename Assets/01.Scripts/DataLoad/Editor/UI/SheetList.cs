@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-public class SpreadList
+public class SheetList
 {
     private VisualTreeAsset spreadDataBtnPrefab;
     private ScrollView itemViewList;
 
-    private List<SpreadInformation> spreadInfos = new();
-    private List<SpreadManageButton> buttons = new();
+    private List<SheetInformation> spreadInfos = new();
+    private List<SheetButton> buttons = new();
 
-    public Action<SpreadInformation> OnSelectSpread { get; set; }
+    public Action<SheetInformation> OnSelectSpread { get; set; }
 
     int curIdx = -1;
 
-    public void Initialize(List<SpreadInformation> infos, ScrollView itemViewList)
+    public void Initialize(List<SheetInformation> infos, ScrollView itemViewList)
     {
         this.itemViewList = itemViewList;
         spreadDataBtnPrefab = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/02.UIBuilder/SpreadLoad/SpreadUIButton.uxml");
@@ -29,16 +29,16 @@ public class SpreadList
         else
         {
             // 데이터 토대로 생성
-            foreach (SpreadInformation info in infos)
+            foreach (SheetInformation info in infos)
             {
                 AddSpreadData(info);
             }
         }
     }
 
-    private void AddSpreadData(SpreadInformation info)
+    private void AddSpreadData(SheetInformation info)
     {
-        SpreadManageButton spreadBtn = new SpreadManageButton();
+        SheetButton spreadBtn = new SheetButton();
         TemplateContainer container = spreadDataBtnPrefab.CloneTree();
 
         buttons.Add(spreadBtn);
@@ -50,7 +50,7 @@ public class SpreadList
 
     public void MakeNewSpreadData()
     {
-        SpreadInformation newInfo = new SpreadInformation();
+        SheetInformation newInfo = new SheetInformation();
         int idx = spreadInfos.Count;
 
         newInfo.sheetName = $"New Spread Sheet ({idx})";
@@ -60,7 +60,7 @@ public class SpreadList
         AddSpreadData(newInfo);
     }
 
-    public void SetCurIndex(SpreadManageButton spreadBtn)
+    public void SetCurIndex(SheetButton spreadBtn)
     {
         curIdx = spreadBtn.Index;
         OnSelectSpread?.Invoke(spreadInfos[curIdx]);

@@ -1,32 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
-using Codice.CM.Common;
-using System.IO;
-using Codice.Utils;
+using SheetImporter;
 
-public class SpreadManagingWindow : EditorWindow
+public class SheetManagingWindow : EditorWindow
 {
-    private List<SpreadInformation> spreadInfos = new();
-    public static SpreadInformation CurInfo { get; private set; }
+    private List<SheetInformation> spreadInfos = new();
+    public static SheetInformation CurInfo { get; private set; }
 
     private ScrollView itemViewList;
     private Button addButton;
     private Button removeButton;
-    private Button loadButton;
 
     #region Manage Instance
-    private SpreadList spreadList = new();
-    private SpreadProfile spreadProfile = new();
-    private SpreadLoadButton spreadLoadButton = new();
+    private SheetList spreadList = new();
+    private SheetProfile spreadProfile = new();
+    private SheetLoadButton spreadLoadButton = new();
+    private CreateScriptButton createScriptButton = new();
+    private CreateSOButton createSOButton = new();
     #endregion
 
     [MenuItem("Tools/Spread Manager")]
     public static void ShowWindow()
     {
-        SpreadManagingWindow window = GetWindow<SpreadManagingWindow>();
+        SheetManagingWindow window = GetWindow<SheetManagingWindow>();
         window.titleContent = new GUIContent("SpreadSheet Manager");
     }
 
@@ -51,7 +49,6 @@ public class SpreadManagingWindow : EditorWindow
         }
     }
 
-
     private void OnDestroy()
     {
         SaveSpreadSheetDatas();
@@ -59,32 +56,16 @@ public class SpreadManagingWindow : EditorWindow
 
     private void LoadSpreadSheetDatas()
     {
-        string directory = $"{Application.dataPath}/Saves";
-        string filePath = $"{directory}/SheetDatas.json";
-        string json;
+        SerlizedList<SheetInformation> list =
+        FileUtils.GetJsonFile<SerlizedList<SheetInformation>>($"{Application.dataPath}/Saves", "SheetDatas.json");
 
-        if (File.Exists(filePath))
-        {
-            json = File.ReadAllText(filePath);
-            spreadInfos = JsonUtility.FromJson<SerlizedList<SpreadInformation>>(json).list;
-        }
-        else
-        {
-            if (!File.Exists(directory))
-                Directory.CreateDirectory(directory);
-
-            SaveSpreadSheetDatas();
-            LoadSpreadSheetDatas();
-        }
+        spreadInfos = list.list;
     }
 
     private void SaveSpreadSheetDatas()
     {
         string filePath = $"{Application.dataPath}/Saves/SheetDatas.json";
-        SerlizedList<SpreadInformation> list = new SerlizedList<SpreadInformation>(spreadInfos);
-        string json = JsonUtility.ToJson(list, true);
-
-        File.WriteAllText(filePath, json, System.Text.Encoding.UTF8);
+        FileUtils.SaveJsonFile(filePath, new SerlizedList<SheetInformation>(spreadInfos));
     }
 
     private void BindingVariables()
@@ -92,7 +73,6 @@ public class SpreadManagingWindow : EditorWindow
         itemViewList = rootVisualElement.Q<ScrollView>("SpreadScroll");
         addButton = rootVisualElement.Q<Button>("AddButton");
         removeButton = rootVisualElement.Q<Button>("RemoveButton");
-        loadButton = rootVisualElement.Q<Button>("LoadButton");
     }
 
     private void BindingEvent()
@@ -104,7 +84,27 @@ public class SpreadManagingWindow : EditorWindow
         spreadList.OnSelectSpread += spreadProfile.OnSelectSpread;
         spreadList.OnSelectSpread += spreadLoadButton.OnSelectedSpread;
 
+        spreadLoadButton.OnSuccessLoad += OnSuccessLoad;
+        
         spreadProfile.OnNameChanged(spreadList.OnNamechange);
+    }
+
+    private void OnSuccessLoad(string sheet)
+    {
+        CurInfo.sheet = sheet;
+
+        Dictionary<string, DataType> dataDict = ExtractSheetTypes.GetSheetTypes(sheet);
+
+        CurInfo.variableNames = new List<string>();
+        CurInfo.types = new List<DataType>();
+
+        foreach (var pair in  dataDict)
+        {
+            CurInfo.variableNames.Add(pair.Key);
+            CurInfo.types.Add(pair.Value);
+        }
+
+        spreadProfile.UpdateList(CurInfo);
     }
 
     private void Initialize()
@@ -112,5 +112,7 @@ public class SpreadManagingWindow : EditorWindow
         spreadList.Initialize(spreadInfos, itemViewList);
         spreadProfile.Initizlie(rootVisualElement);
         spreadLoadButton.Initialize(rootVisualElement.Q<VisualElement>("LoadButtonElement"));
+        createScriptButton.Initialize(rootVisualElement.Q<Button>("CreateScriptButton"));
+        createSOButton.Initialize(rootVisualElement.Q<Button>("CreateSOButton"));
     }
 }

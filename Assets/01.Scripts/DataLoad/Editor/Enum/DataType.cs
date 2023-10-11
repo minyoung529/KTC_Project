@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DataType
+namespace SheetImporter
 {
-    Int,
-    Float,
-    String,
-    Char,
+    //  SheetImporter.DataType
+    // Assembly-CSharp-Editor.SheetImporter.DataType
+    // Assembly-CSharp.SheetImporter.DataType
+    // Assembly-CSharp.DataType
+    public enum DataType
+    {
+        Int,
+        Float,
+        String,
+        Bool,
 
-    Count
+        Count
+    }
 }
