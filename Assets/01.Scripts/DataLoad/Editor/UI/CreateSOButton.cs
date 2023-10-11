@@ -32,14 +32,15 @@ public class CreateSOButton
             Directory.CreateDirectory(directory);
         }
 
-
-
         // 변수 이름 부분(Top) 제외
         for (int i = 1; i < rows.Length; i++)
         {
             string[] datas = rows[i].Split('\t');
             CreateSO(datas);
         }
+
+        string data = rows[1].Split('\t')[0];
+        Selection.activeObject = AssetDatabase.LoadMainAssetAtPath($"Assets/03.SOs/{sheetInfo.sheetName}/{data}.asset");
     }
 
     private void CreateSO(string[] values)

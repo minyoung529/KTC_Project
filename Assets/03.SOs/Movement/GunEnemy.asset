@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 951d57dd092afd343afbdd21b306e98e, type: 3}
-  m_Name: Revolver
+  m_Script: {fileID: 11500000, guid: 6aa082585e05aaf47b1983dec4befbc5, type: 3}
+  m_Name: GunEnemy
   m_EditorClassIdentifier: 
-  gunName: Revolver
-  ammo: 6
-  reloadTime: 1.2
-  speed: 3.01
+  name: GunEnemy
+  speed: 1

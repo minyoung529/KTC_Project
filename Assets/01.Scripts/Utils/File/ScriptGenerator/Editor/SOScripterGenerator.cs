@@ -11,7 +11,7 @@ public static class SOScripterGenerator
 
     public static string GetSOSourceCode(string className, Dictionary<string, DataType> fields)
     {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new();
         stringBuilder.Append(GetUsingCode());
         stringBuilder.AppendLine();
 
@@ -40,7 +40,7 @@ public static class SOScripterGenerator
 
     private static string GetSOClassStart(string className)
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
 
         sb.Append($"[CreateAssetMenu(menuName = \"SO/{className}SO\")]\n");
         sb.Append($"public class {className}SO : ScriptableObject\n");

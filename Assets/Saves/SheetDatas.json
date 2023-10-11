@@ -1,7 +1,7 @@
 ﻿{
     "list": [
         {
-            "sheetName": "BulletData",
+            "sheetName": "GunData",
             "sheetAddress": "1y0d8w9eT7-FEHbfpV-3nw__XMnowMEUr6lHACd3hmJA",
             "sheetRange": "",
             "sheetGid": "0",
@@ -10,15 +10,33 @@
                 "GunName",
                 "Ammo",
                 "ReloadTime",
-                "Speed\r"
+                "Speed",
+                "IsReload\r"
             ],
             "types": [
                 2,
                 0,
                 1,
+                1,
+                3
+            ],
+            "sheet": "GunName\tAmmo\tReloadTime\tSpeed\tIsReload\r\nRevolver\t2384293\t1.2\t3.01\tTRUE\r\nRevolver3\t234234\t1.2\t3\tFALSE\r\nRevolver4\t434\t1.2\t3\tFALSE"
+        },
+        {
+            "sheetName": "Movement",
+            "sheetAddress": "1y0d8w9eT7-FEHbfpV-3nw__XMnowMEUr6lHACd3hmJA",
+            "sheetRange": "",
+            "sheetGid": "406617200",
+            "index": 1,
+            "variableNames": [
+                "Name",
+                "Speed\r"
+            ],
+            "types": [
+                2,
                 1
             ],
-            "sheet": "GunName\tAmmo\tReloadTime\tSpeed\r\nRevolver\t6\t1.2\t3.01\r\nRevolver3\t234234\t1.2\t3\r\nRevolver4\t434\t1.2\t3"
+            "sheet": "Name\tSpeed\r\nPlayer\t3.5\r\nAxEnemy\t1\r\nGunEnemy\t1\r\nSniperEnemy\t1\r\nShieldEnemy\t1"
         }
     ]
 }
