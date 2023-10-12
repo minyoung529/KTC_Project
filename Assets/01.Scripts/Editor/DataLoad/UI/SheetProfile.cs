@@ -21,8 +21,7 @@ public class SheetProfile
     #endregion
 
     #region TYPE LIST
-    private ScrollView typeListView;
-    private List<EnumField> enumFields = new List<EnumField>();
+    private ScrollViewUI<EnumField> typeScrollViewUI = new();
     #endregion
 
     private Label sheetLinkText;
@@ -40,7 +39,7 @@ public class SheetProfile
         gidField = rootVisualElement.Q<TextField>("GidField");
         rangeField = rootVisualElement.Q<TextField>("RangeField");
 
-        typeListView = rootVisualElement.Q<ScrollView>("TypeScrollView");
+        typeScrollViewUI.Initialize(rootVisualElement.Q<ScrollView>("TypeScrollView"));
         sheetLinkText = rootVisualElement.Q<Label>("SheetLinkLabel");
 
         nameChangeEvent += SetNameField;
@@ -94,7 +93,7 @@ public class SheetProfile
 
     public void UpdateList(SheetInformation info)
     {
-        int diff = info.variableNames.Count - enumFields.Count;
+        int diff = info.variableNames.Count - typeScrollViewUI.Items.Count;
 
         // Enum Field가 더 적다면 (=> Enum Field가 필요함)
         if (diff > 0)
@@ -104,36 +103,33 @@ public class SheetProfile
                 CreateSpreadData();
         }
 
-        for (int i = 0; i < enumFields.Count; i++)
+        for (int i = 0; i < typeScrollViewUI.Items.Count; i++)
         {
             bool active = (i < info.variableNames.Count);
+            EnumField enumField = typeScrollViewUI.Items[i];
 
-            enumFields[i].visible = active;
+            enumField.visible = active;
 
             if (active)
             {
-                enumFields[i].Init(DataType.Int);
-                enumFields[i].label = info.variableNames[i];
-                enumFields[i].value = info.types[i];
+                enumField.Init(DataType.Int);
+                enumField.label = info.variableNames[i];
+                enumField.value = info.types[i];
             }
         }
     }
 
     private void CreateSpreadData()
     {
-        TemplateContainer container = spreadTypeField.CloneTree();
-        EnumField enumField = container.Q<EnumField>("EnumField");
+        EnumField enumField = typeScrollViewUI.Create(spreadTypeField);
 
-        enumFields.Add(enumField);
         EventCallback<ChangeEvent<Enum>> evt = (x) => OnChangeEnumValue(x, enumField);
         enumField.RegisterValueChangedCallback(evt);
-
-        typeListView.Add(container);
     }
 
     private void OnChangeEnumValue(ChangeEvent<Enum> evt, EnumField field)
     {
-        int idx = enumFields.IndexOf(field);
+        int idx = typeScrollViewUI.IndexOf(field);
         curInfo.types[idx] = (DataType)evt.newValue;
     }
 }

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CharacterMove : CharacterFunction
 {
+    [SerializeField]
+    protected MovementSO moveStat;
+
+    [SerializeField]
     protected Rigidbody rigid;
     public Rigidbody Rigidbody => rigid;
 
     public override void Initialize(Character character)
     {
-        rigid = character.GetComponent<Rigidbody>();    
+        OnInitialized(character);
     }
 
     public void Move(Vector2 moveVec)
@@ -21,4 +25,6 @@ public class CharacterMove : CharacterFunction
     {
         rigid.velocity = velocity;
     }
+
+    protected virtual void OnInitialized(Character character) { }
 }

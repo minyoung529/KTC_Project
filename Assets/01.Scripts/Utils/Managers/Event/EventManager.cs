@@ -5,15 +5,25 @@ using UnityEngine;
 
 public static class EventManager
 {
-    private static Dictionary<EventName, Action> actionDict;
+    private static Dictionary<EventName, Action> actionDict = new();
 
     public static void StartListening(EventName eventName, Action action)
     {
-        actionDict[eventName] += action;
+        if (!actionDict.ContainsKey(eventName))
+        {
+            actionDict.Add(eventName, action);
+        }
+        else
+        {
+            actionDict[eventName] += action;
+        }
     }
 
     public static void StopListening(EventName eventName, Action action)
     {
+        if (!actionDict.ContainsKey(eventName))
+            return;
+
         actionDict[eventName] -= action;
     }
 

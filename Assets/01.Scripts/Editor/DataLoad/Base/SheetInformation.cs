@@ -20,10 +20,10 @@ public class SheetInformation
     {
         string link = $"https://docs.google.com/spreadsheets/d/{sheetAddress}/export?format=tsv";
 
-        if (sheetRange.Length > 0)
+        if (string.IsNullOrEmpty(sheetRange) && sheetRange.Length > 0)
             link = $"{link}&range={sheetRange}";
 
-        if (sheetGid.Length > 0)
+        if (string.IsNullOrEmpty(sheetGid) && sheetGid.Length > 0)
             link = $"{link}&gid={sheetGid}";
 
         return link;
@@ -33,22 +33,11 @@ public class SheetInformation
     {
         Dictionary<string, DataType> dict = new Dictionary<string, DataType>();
 
-        for(int i = 0; i < types.Count; i++)
+        for (int i = 0; i < types.Count; i++)
         {
-            dict.Add(variableNames[i], types[i]);   
+            dict.Add(variableNames[i], types[i]);
         }
 
         return dict;
     }
-}
-
-[System.Serializable]
-public class SerlizedList<T>
-{
-    public SerlizedList(List<T> list)
-    {
-        this.list = list;
-    }
-
-    public List<T> list;
 }

@@ -41,12 +41,6 @@ public class SheetManagingWindow : EditorWindow
 
         // 이벤트 바인딩
         BindingEvent();
-
-        // 선택
-        if (spreadInfos.Count > 0)
-        {
-            spreadList.SetCurIndex(0);
-        }
     }
 
     private void OnDestroy()
@@ -56,8 +50,8 @@ public class SheetManagingWindow : EditorWindow
 
     private void LoadSpreadSheetDatas()
     {
-        SerlizedList<SheetInformation> list =
-        FileUtils.GetJsonFile<SerlizedList<SheetInformation>>($"{Application.dataPath}/Saves", "SheetDatas.json");
+        SerializedList<SheetInformation> list =
+        FileUtils.GetJsonFile<SerializedList<SheetInformation>>($"{Application.dataPath}/Saves", "SheetDatas.json");
 
         spreadInfos = list.list;
     }
@@ -65,7 +59,7 @@ public class SheetManagingWindow : EditorWindow
     private void SaveSpreadSheetDatas()
     {
         string filePath = $"{Application.dataPath}/Saves/SheetDatas.json";
-        FileUtils.SaveJsonFile(filePath, new SerlizedList<SheetInformation>(spreadInfos));
+        FileUtils.SaveJsonFile(filePath, new SerializedList<SheetInformation>(spreadInfos));
     }
 
     private void BindingVariables()
