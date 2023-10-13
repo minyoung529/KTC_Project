@@ -18,7 +18,8 @@ public class CharacterMove : CharacterFunction
 
     public void Move(Vector2 moveVec)
     {
-        rigid.MovePosition(rigid.position + (Vector3)moveVec);
+        //rigid.position += (Vector3)moveVec;
+        rigid.MovePosition(rigid.position + (Vector3)moveVec * Time.deltaTime * moveStat.speed);
     }
 
     public void SetVelocity(Vector2 velocity)

@@ -1,10 +1,12 @@
 using SheetImporter;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
@@ -26,7 +28,7 @@ public class CreateSOButton
         SheetInformation sheetInfo = SheetManagingWindow.CurInfo;
         string directory = $"{Application.dataPath}/03.SOs/{sheetInfo.sheetName}";
         string[] rows = sheetInfo.sheet.Split('\n');
-        
+
         if (!File.Exists(directory))
         {
             Directory.CreateDirectory(directory);
@@ -50,6 +52,8 @@ public class CreateSOButton
         ScriptableObject newObj = ScriptableObject.CreateInstance($"{info.sheetName}SO");
         List<FieldInfo> fieldInfos = new();
 
+        string filePath = $"{soPath}/{info.sheetName}/{values[0]}.asset";
+
         foreach (string str in info.variableNames)
         {
             // add fields
@@ -63,9 +67,26 @@ public class CreateSOButton
             fieldInfos[i].SetValue(newObj, GetObjectData(values[i], info.types[i]));
         }
 
-        //newObj.name = ;
-        AssetDatabase.CreateAsset(newObj, $"{soPath}/{info.sheetName}/{values[0]}.asset");
+        ScriptableObject so = AssetDatabase.LoadAssetAtPath<ScriptableObject>(filePath);
+
+        if (so == null)
+        {
+            AssetDatabase.CreateAsset(newObj, filePath);
+        }
+        else
+        {
+            for (int i = 0; i < info.types.Count; i++)
+            {
+                // set value on fields
+                fieldInfos[i].SetValue(so, GetObjectData(values[i], info.types[i]));
+            }
+
+            EditorUtility.SetDirty(so);
+            newObj = so;
+        }
+
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
         Selection.activeObject = newObj;
     }
 

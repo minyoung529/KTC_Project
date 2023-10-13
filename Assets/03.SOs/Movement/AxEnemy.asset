@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: AxEnemy
   speed: 1
+  guid: a34f9bcd68f5f484889b25a938f32a41

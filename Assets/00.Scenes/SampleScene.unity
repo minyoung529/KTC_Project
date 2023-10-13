@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e909dd7d86c6ac043a9e2a984d1ebe5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveStat: {fileID: 11400000, guid: 5a882d1348b1eb34da5201fd88b00909, type: 2}
+  moveStat: {fileID: 11400000, guid: bb196352ede6d2f42b81eaf81cdff7af, type: 2}
   rigid: {fileID: 937805490}
 --- !u!1 &937805487
 GameObject:

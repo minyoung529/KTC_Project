@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: ShieldEnemy
   speed: 1
+  guid: 5dd5409a149ff1f4c9b9c8801b21e34f

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: GunEnemy
   speed: 1
+  guid: 40b428325b688414a8daf12dcf270b28

@@ -29,6 +29,7 @@ public static class EventManager
 
     public static void Trigger(EventName eventName)
     {
+        if (!actionDict.ContainsKey(eventName)) return;
         actionDict[eventName]?.Invoke();
     }
 }

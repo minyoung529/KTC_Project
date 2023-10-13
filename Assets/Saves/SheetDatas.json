@@ -34,9 +34,9 @@
             ],
             "types": [
                 2,
-                1
+                0
             ],
-            "sheet": "Name\tSpeed\r\nPlayer\t3.5\r\nAxEnemy\t1\r\nGunEnemy\t1\r\nSniperEnemy\t1\r\nShieldEnemy\t1"
+            "sheet": "Name\tSpeed\r\nPlayer\t2334\r\nAxEnemy\t1\r\nGunEnemy\t1\r\nSniperEnemy\t1\r\nShieldEnemy\t1"
         }
     ]
 }

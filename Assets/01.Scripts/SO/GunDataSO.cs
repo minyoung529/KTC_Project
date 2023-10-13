@@ -8,5 +8,6 @@ public class GunDataSO : ScriptableObject
 	public int ammo;
 	public float reloadTime;
 	public float speed;
-	public bool isReload;
+	public bool isReload
+;
 }

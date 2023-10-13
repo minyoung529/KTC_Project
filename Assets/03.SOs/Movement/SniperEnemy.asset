@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SniperEnemy
   speed: 1
+  guid: 5a882d1348b1eb34da5201fd88b00909

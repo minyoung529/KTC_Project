@@ -21,9 +21,9 @@ public class InputManager : Manager
         }
     }
 
-    public override void FixedUpdate()
+    public override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
 
         if (inputEvents == null)
             return;

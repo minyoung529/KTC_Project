@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using SheetImporter;
 
 [System.Serializable]
@@ -20,10 +21,10 @@ public class SheetInformation
     {
         string link = $"https://docs.google.com/spreadsheets/d/{sheetAddress}/export?format=tsv";
 
-        if (string.IsNullOrEmpty(sheetRange) && sheetRange.Length > 0)
+        if (!string.IsNullOrEmpty(sheetRange) && sheetRange.Length > 0)
             link = $"{link}&range={sheetRange}";
 
-        if (string.IsNullOrEmpty(sheetGid) && sheetGid.Length > 0)
+        if (!string.IsNullOrEmpty(sheetGid) && sheetGid.Length > 0)
             link = $"{link}&gid={sheetGid}";
 
         return link;

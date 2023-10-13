@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   name: Player
-  speed: 3.5
+  speed: 2334
+  guid: bb196352ede6d2f42b81eaf81cdff7af
